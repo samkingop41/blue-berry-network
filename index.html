@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Berry Network</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f0f, #14001f);
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Particles Canvas */
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.logo-icon {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    background: #00ff88;
+    clip-path: polygon(50% 0%, 85% 35%, 70% 100%, 30% 100%, 15% 35%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: 800;
+    font-size: 28px;
+    box-shadow: 0 0 25px #00ff88;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: #00ff88;
+    text-shadow: 0 0 20px #00ff88;
+}
+
+.hero p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+/* Server Status */
+.status-box {
+    margin-top: 30px;
+    padding: 15px 25px;
+    display: inline-block;
+    border: 1px solid #00ff88;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #00ff88;
+}
+
+.status-online { color: #00ff88; }
+.status-offline { color: red; }
+
+/* Buttons */
+.button-container {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.glow-btn {
+    padding: 15px 30px;
+    border: 2px solid #00ff88;
+    background: transparent;
+    color: #00ff88;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.glow-btn:hover {
+    background: #00ff88;
+    color: black;
+    box-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #00ff88;
+    color: black;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 20px #00ff88;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.4s ease;
+}
+
+.popup.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+footer {
+    margin-top: 100px;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #222;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="logo">
+    <div class="logo-icon">BB</div>
+</div>
+
+<section class="hero">
+    <h1>Blue Berry Network</h1>
+    <p>Join the Best Minecraft Survival Experience</p>
+
+    <div class="status-box">
+        Server Status:
+        <span id="server-status">Checking...</span>
+        <div id="player-count"></div>
+    </div>
+
+    <div class="button-container">
+        <button class="glow-btn" onclick="copyDiscord()">Join Discord</button>
+        <button class="glow-btn" onclick="copyIP()">Copy Minecraft IP & Port</button>
+        <button class="glow-btn" onclick="goStore()">Store</button>
+    </div>
+</section>
+
+<div id="popup" class="popup"></div>
+
+<footer>
+    © 2026 Blue Berry Network. All rights reserved.
+</footer>
+
+<script>
+/* ================= PARTICLES ================= */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray = [];
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+    }
+    draw() {
+        ctx.fillStyle = "#00ff88";
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "#00ff88";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    for (let i = 0; i < 80; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+}
+
+initParticles();
+animateParticles();
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+/* ================= COPY FUNCTIONS ================= */
+function showPopup(message) {
+    const popup = document.getElementById("popup");
+    popup.innerText = message;
+    popup.classList.add("show");
+    setTimeout(() => popup.classList.remove("show"), 2500);
+}
+
+function copyDiscord() {
+    navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");
+    showPopup("Discord Link Copied!");
+}
+
+function copyIP() {
+    navigator.clipboard.writeText("uae-2.royalnode.cloud:25566");
+    showPopup("Minecraft IP Copied!");
+}
+
+function goStore() {
+    window.location.href = "store.html";
+}
+
+/* ================= SERVER STATUS CHECK ================= */
+async function checkServer() {
+    try {
+        const response = await fetch("https://api.mcsrvstat.us/2/uae-2.royalnode.cloud:25566");
+        const data = await response.json();
+
+        const statusEl = document.getElementById("server-status");
+        const playerEl = document.getElementById("player-count");
+
+        if (data.online) {
+            statusEl.innerHTML = "Online";
+            statusEl.className = "status-online";
+            playerEl.innerHTML = `Players: ${data.players.online} / ${data.players.max}`;
+        } else {
+            statusEl.innerHTML = "Offline";
+            statusEl.className = "status-offline";
+            playerEl.innerHTML = "";
+        }
+    } catch (error) {
+        document.getElementById("server-status").innerHTML = "Error";
+    }
+}
+
+checkServer();
+setInterval(checkServer, 30000); // refresh every 30 sec
+</script>
+
+</body>
+</html>
