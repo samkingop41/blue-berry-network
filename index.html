@@ -216,8 +216,9 @@ footer span{
     <div id="player-count"></div>
   </div>
 
+  <!-- FIXED DISCORD MEMBERS -->
   <div class="discord-counter">
-    Discord Members: <span id="dc-members">Loading...</span>
+    <span id="dc-members">Loading...</span>
   </div>
 
   <div class="button-container">
@@ -251,15 +252,15 @@ footer span{
 <script>
 // COPY FUNCTIONS
 function copyIP(){
-navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");
-alert("IP Copied!");
+  navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");
+  alert("IP Copied!");
 }
 function copyDiscord(){
-navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");
-alert("Discord Link Copied!");
+  navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");
+  alert("Discord Link Copied!");
 }
 function goStore(){
-window.location.href="store.html";
+  window.location.href="store.html";
 }
 
 // SERVER STATUS
@@ -277,9 +278,11 @@ async function checkServer(){
     }else{
       s.innerHTML="Offline";
       s.style.color="red";
+      p.innerHTML="";
     }
   }catch{
     document.getElementById("server-status").innerHTML="Error";
+    document.getElementById("player-count").innerHTML="";
   }
 }
 checkServer();
@@ -290,14 +293,14 @@ async function fetchDiscordMembers(){
   try{
     const response = await fetch("https://discord.com/api/guilds/1388409457603641406/widget.json");
     const data = await response.json();
-    // yahan "Discord Members Online" set kar do
     document.getElementById("dc-members").innerText = `Discord Members Online: ${data.presence_count}`;
   } catch {
     document.getElementById("dc-members").innerText = "Discord Members Online: Unavailable";
   }
 }
 fetchDiscordMembers();
-setInterval(fetchDiscordMembers, 30000);
+setInterval(fetchDiscordMembers,30000);
+
 // SCROLL ANIMATION
 window.addEventListener("scroll",()=>{
   document.querySelectorAll("section").forEach(sec=>{
@@ -310,5 +313,3 @@ window.addEventListener("scroll",()=>{
 
 </body>
 </html>
-
-
