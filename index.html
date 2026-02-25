@@ -4,100 +4,186 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Berry Network</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
-body{overflow-x:hidden;color:white;position:relative;background:#000;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#000;
+    color:white;
+    overflow-x:hidden;
+}
 
-/* ANIMATED NEON GRADIENT OVERLAY */
+/* Background Glow */
 body::before{
     content:"";
-    position:fixed;top:0;left:0;width:100%;height:100%;z-index:-5;
-    background: linear-gradient(135deg,#0a0a0a,#0f0f0f,#050505,#0a0a0a);
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle at center,#001a12 0%,#000 70%);
+    z-index:-5;
 }
 
-/* GRID LINES / NEON HINTS */
-.grid-lines{
-    position:fixed;width:100%;height:100%;z-index:-4;
-    background:
-    repeating-linear-gradient(0deg, rgba(0,255,174,0.05), rgba(0,255,174,0.05) 1px, transparent 1px, transparent 25px),
-    repeating-linear-gradient(90deg, rgba(0,255,174,0.05), rgba(0,255,174,0.05) 1px, transparent 1px, transparent 25px);
-}
-
-/* PARTICLES CANVAS */
-#particles{position:fixed;width:100%;height:100%;z-index:-3;}
-
-/* FLOATING SHAPES */
-.shape{
-    position:absolute;
-    border:1px solid #00ff88;
-    width:12px; height:12px;
-    opacity:0.15;
-    border-radius:3px;
-    box-shadow:0 0 10px #00ff88,0 0 20px #00ff88;
-    animation:shapeMove linear infinite;
-}
-@keyframes shapeMove{
-    0%{transform:translateY(0) rotate(0deg);}
-    50%{transform:translateY(-250px) rotate(180deg);}
-    100%{transform:translateY(0) rotate(360deg);}
+/* PARTICLES */
+#particles{
+    position:fixed;
+    width:100%;
+    height:100%;
+    z-index:-4;
 }
 
 /* LOGO */
-.logo{text-align:center;margin-top:50px;}
-.real-logo{width:140px;display:block;margin:auto;filter:drop-shadow(0 0 60px #00ff88);}
+.logo{
+    text-align:center;
+    margin-top:40px;
+}
+.logo img{
+    width:140px;
+    filter:drop-shadow(0 0 40px #00ff88);
+}
 
 /* HERO */
-.hero{text-align:center;padding:60px 20px;position:relative;z-index:1;}
-.hero h1{font-size:3.2rem;color:#00ff88;text-shadow:0 0 25px #00ff88,0 0 60px #00ff88;}
-.hero p{margin-top:20px;font-size:1.2rem;color:#aaa;text-shadow:0 0 10px #00ff88;}
+.hero{
+    text-align:center;
+    padding:60px 20px 80px;
+}
+.hero h1{
+    font-family:'Orbitron',sans-serif;
+    font-size:3.5rem;
+    color:#00ff88;
+    text-shadow:0 0 30px #00ff88;
+}
+.hero p{
+    margin-top:20px;
+    font-size:1.2rem;
+    color:#aaa;
+}
 
-/* STATUS BOX */
-.status-box{margin-top:30px;padding:20px 30px;display:inline-block;border:1px solid #00ff88;border-radius:12px;box-shadow:0 0 35px #00ff88;animation:statusPulse 2s ease-in-out infinite;}
-.status-online{color:#00ff88;}
-.status-offline{color:red;}
-@keyframes statusPulse{
-    0%,100%{box-shadow:0 0 25px #00ff88;}
-    50%{box-shadow:0 0 50px #00ff88;}
+/* STATUS */
+.status-box{
+    margin-top:30px;
+    display:inline-block;
+    padding:15px 30px;
+    border:1px solid #00ff88;
+    border-radius:12px;
+    box-shadow:0 0 25px #00ff88;
 }
 
 /* BUTTONS */
-.button-container{margin-top:50px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.button-container{
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
 .glow-btn{
-    padding:18px 36px;border:2px solid #00ff88;background:transparent;color:#00ff88;
-    font-size:1rem;cursor:pointer;border-radius:10px;transition:0.3s ease;text-transform:uppercase;font-weight:700;
-    box-shadow:0 0 15px #00ff88;
+    padding:15px 35px;
+    border:2px solid #00ff88;
+    background:transparent;
+    color:#00ff88;
+    font-weight:700;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
 }
 .glow-btn:hover{
-    background:#00ff88;color:black;
-    box-shadow:0 0 60px #00ff88,0 0 120px #00ff88;
-    transform:scale(1.08);
+    background:#00ff88;
+    color:black;
+    box-shadow:0 0 40px #00ff88;
+    transform:scale(1.1);
 }
 
-/* POPUP */
-.popup{position:fixed;bottom:30px;right:30px;background:#00ff88;color:black;padding:12px 20px;border-radius:6px;
-    box-shadow:0 0 25px #00ff88;opacity:0;transform:translateY(20px);transition:0.4s ease;}
-.popup.show{opacity:1;transform:translateY(0);}
+/* SECTIONS */
+section{
+    padding:100px 20px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+section.visible{
+    opacity:1;
+    transform:translateY(0);
+}
 
-/* FOOTER */
-footer{margin-top:120px;text-align:center;padding:20px;border-top:1px solid #111;color:#777;text-shadow:0 0 10px #00ff88;}
+/* FEATURES */
+.feature-box{
+    display:inline-block;
+    margin:20px;
+    padding:20px 30px;
+    border:1px solid #00ff88;
+    border-radius:10px;
+    transition:0.3s;
+}
+.feature-box:hover{
+    box-shadow:0 0 40px #00ff88;
+    transform:translateY(-10px);
+}
+
+/* FOUNDERS */
+.founder{
+    margin:15px;
+    font-size:1.3rem;
+    color:#00ff88;
+    text-shadow:0 0 15px #00ff88;
+}
+
+/* TRAILER */
+iframe{
+    margin-top:30px;
+    width:80%;
+    height:400px;
+    border-radius:12px;
+    box-shadow:0 0 40px #00ff88;
+}
+
+/* FLOATING BUTTON */
+.floating-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#00ff88;
+    color:black;
+    padding:15px 30px;
+    border-radius:50px;
+    font-weight:800;
+    text-decoration:none;
+    box-shadow:0 0 40px #00ff88;
+    animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 20px #00ff88;}
+    50%{box-shadow:0 0 60px #00ff88;}
+    100%{box-shadow:0 0 20px #00ff88;}
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #111;
+    color:#666;
+}
+footer span{
+    color:#00ff88;
+    text-shadow:0 0 15px #00ff88;
+}
 </style>
 </head>
 <body>
 
-<div class="grid-lines"></div>
 <canvas id="particles"></canvas>
 
 <div class="logo">
-    <img src="logo.png" alt="Blue Berry Logo" class="real-logo">
+    <img src="logo.png" alt="Blue Berry Logo">
 </div>
 
-<section class="hero">
+<div class="hero">
     <h1>Blue Berry Network</h1>
-    <p>Join the Ultimate Minecraft Survival Experience</p>
+    <p>The Ultimate Minecraft Survival Experience</p>
 
     <div class="status-box">
         Server Status: <span id="server-status">Checking...</span>
@@ -105,68 +191,90 @@ footer{margin-top:120px;text-align:center;padding:20px;border-top:1px solid #111
     </div>
 
     <div class="button-container">
+        <button class="glow-btn" onclick="copyIP()">Copy IP</button>
         <button class="glow-btn" onclick="copyDiscord()">Join Discord</button>
-        <button class="glow-btn" onclick="copyIP()">Copy Minecraft IP & Port</button>
         <button class="glow-btn" onclick="goStore()">Store</button>
     </div>
+</div>
+
+<section>
+<h2>Why Join Us?</h2>
+<div class="feature-box">⚔️ Custom PvP</div>
+<div class="feature-box">🏰 Survival SMP</div>
+<div class="feature-box">💎 Economy System</div>
+<div class="feature-box">🎉 Weekly Events</div>
 </section>
 
-<div id="popup" class="popup"></div>
+<section>
+<h2>Founders</h2>
+<div class="founder">👑 santurio41</div>
+<div class="founder">👑 [Lᴇᴠᴇʟ]<$</div>
+<div class="founder">👑 ITZ_EVILZ</div>
+</section>
+
+<section>
+<h2>Server Trailer</h2>
+<iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+</section>
+
+<a href="https://discord.gg/xmpdSp3D" class="floating-btn">JOIN NOW</a>
 
 <footer>
-    © 2022 Blue Berry Network. All rights reserved. <br> Made by santurio41
+© 2026 Blue Berry Network. All Rights Reserved. <br>
+<span>Made by santurio41</span>
 </footer>
 
 <script>
 // PARTICLES
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth; canvas.height=window.innerHeight;
-let particlesArray=[];
-class Particle{
-    constructor(){
-        this.x=Math.random()*canvas.width;
-        this.y=Math.random()*canvas.height;
-        this.size=Math.random()*3+1;
-        this.speedX=Math.random()*1-0.5;
-        this.speedY=Math.random()*1-0.5;
-        this.alpha=Math.random()*0.5+0.3;
-    }
-    update(){
-        this.x+=this.speedX;
-        this.y+=this.speedY;
-        if(this.x>canvas.width||this.x<0) this.speedX*=-1;
-        if(this.y>canvas.height||this.y<0) this.speedY*=-1;
-    }
-    draw(){
-        ctx.fillStyle=`rgba(0,255,136,${this.alpha})`;
-        ctx.shadowBlur=25;
-        ctx.shadowColor="#00ff88";
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<200;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        size:Math.random()*3,
+        speedX:(Math.random()-0.5),
+        speedY:(Math.random()-0.5)
+    });
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#00ff88";
+    particles.forEach(p=>{
+        p.x+=p.speedX;
+        p.y+=p.speedY;
+        if(p.x<0||p.x>canvas.width) p.speedX*=-1;
+        if(p.y<0||p.y>canvas.height) p.speedY*=-1;
         ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
         ctx.fill();
-    }
+    });
+    requestAnimationFrame(animate);
 }
-function init(){for(let i=0;i<250;i++)particlesArray.push(new Particle());}
-function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particlesArray.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
-init(); animate();
+animate();
 
-// FLOATING SHAPES
-for(let i=0;i<50;i++){
-    let s=document.createElement("div");
-    s.className="shape";
-    s.style.left=Math.random()*window.innerWidth+"px";
-    s.style.top=Math.random()*window.innerHeight+"px";
-    s.style.animationDuration=(6+Math.random()*6)+"s";
-    s.style.opacity=Math.random()*0.2+0.1;
-    document.body.appendChild(s);
+window.addEventListener("resize",()=>{
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+});
+
+// COPY FUNCTIONS
+function copyIP(){
+navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");
+alert("IP Copied!");
 }
-
-// POPUP
-function showPopup(msg){const p=document.getElementById("popup"); p.innerText=msg; p.classList.add("show"); setTimeout(()=>p.classList.remove("show"),2500);}
-function copyDiscord(){navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");showPopup("Discord Link Copied!");}
-function copyIP(){navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");showPopup("Minecraft IP Copied!");}
-function goStore(){window.location.href="store.html";}
+function copyDiscord(){
+navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");
+alert("Discord Link Copied!");
+}
+function goStore(){
+window.location.href="store.html";
+}
 
 // SERVER STATUS
 async function checkServer(){
@@ -175,14 +283,29 @@ async function checkServer(){
         const d=await r.json();
         const s=document.getElementById("server-status");
         const p=document.getElementById("player-count");
-        if(d.online){s.innerHTML="Online";s.className="status-online";p.innerHTML=`Players: ${d.players.online} / ${d.players.max}`;}
-        else{s.innerHTML="Offline";s.className="status-offline";p.innerHTML="";}
-    }catch{s=document.getElementById("server-status");s.innerHTML="Error";}
+        if(d.online){
+            s.innerHTML="Online";
+            s.style.color="#00ff88";
+            p.innerHTML=`Players: ${d.players.online}/${d.players.max}`;
+        }else{
+            s.innerHTML="Offline";
+            s.style.color="red";
+        }
+    }catch{
+        document.getElementById("server-status").innerHTML="Error";
+    }
 }
-checkServer(); setInterval(checkServer,30000);
+checkServer();
+setInterval(checkServer,30000);
 
-// RESIZE CANVAS
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+// SCROLL ANIMATION
+window.addEventListener("scroll",()=>{
+    document.querySelectorAll("section").forEach(sec=>{
+        if(sec.getBoundingClientRect().top < window.innerHeight-100){
+            sec.classList.add("visible");
+        }
+    });
+});
 </script>
 
 </body>
