@@ -80,15 +80,6 @@ nav a:hover{
   color:#aaa;
 }
 
-/* IP BOX */
-.ip-box{
-  margin-top:20px;
-  font-weight:bold;
-  color:#00ff88;
-  cursor:pointer;
-  text-shadow:0 0 20px #00ff88;
-}
-
 /* STATUS BOX */
 .status-box{
   margin-top:20px;
@@ -216,10 +207,6 @@ footer span{
   <h1>Blue Berry Network</h1>
   <p>The Ultimate Minecraft Survival Experience</p>
 
-  <div class="ip-box" onclick="copyIP()">
-    BlueBerrySmp.royalnode.cloud:25566 (Click to Copy)
-  </div>
-
   <div class="status-box">
     Server: <span id="server-status">Checking...</span>
     <div id="player-count"></div>
@@ -230,6 +217,7 @@ footer span{
   </div>
 
   <div class="button-container">
+    <button class="glow-btn" onclick="copyMinecraftIP()">Join Minecraft Server</button>
     <button class="glow-btn" onclick="copyDiscord()">Join Discord</button>
     <button class="glow-btn" onclick="goStore()">Store</button>
   </div>
@@ -259,9 +247,9 @@ footer span{
 
 <script>
 // COPY FUNCTIONS
-function copyIP(){
+function copyMinecraftIP(){
   navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");
-  alert("IP Copied!");
+  alert("Minecraft Server IP Copied!");
 }
 function copyDiscord(){
   navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");
