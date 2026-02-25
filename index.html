@@ -9,128 +9,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{overflow-x:hidden;color:white;position:relative;cursor:none;background:#000;}
+
+/* ANIMATED GRADIENT BACKGROUND */
+body::before{
+    content:"";
+    position:fixed;top:0;left:0;width:100%;height:100%;z-index:-5;
+    background: linear-gradient(270deg,#0f0f0f,#14001f,#001f14,#14001f);
+    background-size: 800% 800%;
+    animation:gradientBG 25s ease infinite;
+}
+@keyframes gradientBG{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+/* GRID LINES */
+.grid-lines{
+    position:fixed;width:100%;height:100%;z-index:-4;
+    background:
+    repeating-linear-gradient(0deg, rgba(0,255,174,0.05), rgba(0,255,174,0.05) 1px, transparent 1px, transparent 25px),
+    repeating-linear-gradient(90deg, rgba(0,255,174,0.05), rgba(0,255,174,0.05) 1px, transparent 1px, transparent 25px);
 }
 
-body {
-    background: linear-gradient(135deg, #0f0f0f, #14001f);
-    color: white;
-    overflow-x: hidden;
+/* PARTICLES CANVAS */
+#particles{position:fixed;width:100%;height:100%;z-index:-3;}
+
+/* CURSOR TRAIL */
+.cursor-trail{position:fixed;width:15px;height:15px;border-radius:50%;background:#00ff88;pointer-events:none;z-index:100;mix-blend-mode:screen;box-shadow:0 0 15px #00ff88,0 0 30px #00ff88;transition:0.05s;}
+
+/* LOGO */
+.logo{text-align:center;margin-top:40px;}
+.real-logo{width:130px;display:block;margin:auto;filter:drop-shadow(0 0 45px #00ff88);transition:0.3s;}
+body:hover .real-logo{transform:translateY(-5px) scale(1.05);}
+
+/* HERO */
+.hero{text-align:center;padding:60px 20px;}
+.hero h1{font-size:3rem;color:#00ff88;text-shadow:0 0 20px #00ff88,0 0 50px #00ff88;}
+.hero p{margin-top:20px;font-size:1.2rem;color:#aaa;}
+
+/* STATUS BOX */
+.status-box{margin-top:30px;padding:15px 25px;display:inline-block;border:1px solid #00ff88;border-radius:10px;box-shadow:0 0 30px #00ff88;}
+.status-online{color:#00ff88;}
+.status-offline{color:red;}
+
+/* BUTTONS */
+.button-container{margin-top:40px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.glow-btn{
+    padding:15px 30px;border:2px solid #00ff88;background:transparent;color:#00ff88;
+    font-size:1rem;cursor:pointer;border-radius:8px;transition:0.3s ease;text-transform:uppercase;font-weight:600;
+    box-shadow:0 0 15px #00ff88;
+    perspective:1000px;
+}
+.glow-btn:hover{
+    background:#00ff88;color:black;
+    box-shadow:0 0 40px #00ff88,0 0 80px #00ff88;
+    transform:rotateX(5deg) rotateY(5deg) scale(1.05);
 }
 
-/* Background particles */
-#particles {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
+/* POPUP */
+.popup{position:fixed;bottom:30px;right:30px;background:#00ff88;color:black;padding:12px 20px;border-radius:6px;
+    box-shadow:0 0 25px #00ff88;opacity:0;transform:translateY(20px);transition:0.4s ease;}
+.popup.show{opacity:1;transform:translateY(0);}
 
-/* REAL LOGO */
-.logo {
-    text-align: center;
-    margin-top: 40px;
-}
-
-.real-logo {
-    width: 130px;
-    display: block;
-    margin: auto;
-    filter: drop-shadow(0 0 25px #00ff88);
-}
-
-/* Hero */
-.hero {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    color: #00ff88;
-    text-shadow: 0 0 20px #00ff88;
-}
-
-.hero p {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #ccc;
-}
-
-.status-box {
-    margin-top: 30px;
-    padding: 15px 25px;
-    display: inline-block;
-    border: 1px solid #00ff88;
-    border-radius: 8px;
-    box-shadow: 0 0 15px #00ff88;
-}
-
-.status-online { color: #00ff88; }
-.status-offline { color: red; }
-
-.button-container {
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.glow-btn {
-    padding: 15px 30px;
-    border: 2px solid #00ff88;
-    background: transparent;
-    color: #00ff88;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s ease;
-}
-
-.glow-btn:hover {
-    background: #00ff88;
-    color: black;
-    box-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
-}
-
-.popup {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #00ff88;
-    color: black;
-    padding: 12px 20px;
-    border-radius: 6px;
-    box-shadow: 0 0 20px #00ff88;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.4s ease;
-}
-
-.popup.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-footer {
-    margin-top: 100px;
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid #222;
-    color: #777;
-}
+/* FOOTER */
+footer{margin-top:100px;text-align:center;padding:20px;border-top:1px solid #222;color:#777;}
 </style>
 </head>
 <body>
 
+<div class="grid-lines"></div>
 <canvas id="particles"></canvas>
+<div id="cursorTrail" class="cursor-trail"></div>
 
-<!-- ✅ REAL LOGO -->
 <div class="logo">
     <img src="logo.png" alt="Blue Berry Logo" class="real-logo">
 </div>
@@ -140,8 +89,7 @@ footer {
     <p>Join the Best Minecraft Survival Experience</p>
 
     <div class="status-box">
-        Server Status:
-        <span id="server-status">Checking...</span>
+        Server Status: <span id="server-status">Checking...</span>
         <div id="player-count"></div>
     </div>
 
@@ -159,86 +107,46 @@ footer {
 </footer>
 
 <script>
-// particles
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particlesArray = [];
-class Particle {
-    constructor() {
-        this.x = Math.random()*canvas.width;
-        this.y = Math.random()*canvas.height;
-        this.size = Math.random()*2+1;
-        this.speedX = Math.random()*1-0.5;
-        this.speedY = Math.random()*1-0.5;
-    }
-    update(){
-        this.x+=this.speedX;
-        this.y+=this.speedY;
-        if(this.x>canvas.width||this.x<0) this.speedX*=-1;
-        if(this.y>canvas.height||this.y<0) this.speedY*=-1;
-    }
-    draw(){
-        ctx.fillStyle="#00ff88";
-        ctx.shadowBlur=15;
-        ctx.shadowColor="#00ff88";
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fill();
-    }
+// PARTICLES
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let particlesArray=[];
+class Particle{
+    constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*3+1;this.speedX=Math.random()*1-0.5;this.speedY=Math.random()*1-0.5;this.alpha=Math.random()*0.5+0.3;}
+    update(){this.x+=this.speedX; this.y+=this.speedY; if(this.x>canvas.width||this.x<0) this.speedX*=-1; if(this.y>canvas.height||this.y<0) this.speedY*=-1;}
+    draw(){ctx.fillStyle=`rgba(0,255,136,${this.alpha})`; ctx.shadowBlur=25; ctx.shadowColor="#00ff88"; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();}
 }
-function init(){for(let i=0;i<80;i++)particlesArray.push(new Particle());}
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particlesArray.forEach(p=>{p.update();p.draw();});
-    requestAnimationFrame(animate);
-}
+function init(){for(let i=0;i<180;i++)particlesArray.push(new Particle());}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particlesArray.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
 init(); animate();
 
-// popup
-function showPopup(msg){
-    const p=document.getElementById("popup");
-    p.innerText=msg;
-    p.classList.add("show");
-    setTimeout(()=>p.classList.remove("show"),2500);
-}
-function copyDiscord(){
-    navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");
-    showPopup("Discord Link Copied!");
-}
-function copyIP(){
-    navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");
-    showPopup("Minecraft IP Copied!");
-}
-function goStore(){ window.location.href="store.html"; }
+// CURSOR TRAIL
+const cursor = document.getElementById("cursorTrail");
+window.addEventListener("mousemove", e=>{cursor.style.left = e.clientX-7+"px"; cursor.style.top = e.clientY-7+"px";});
 
-// server status
+// POPUP
+function showPopup(msg){const p=document.getElementById("popup"); p.innerText=msg; p.classList.add("show"); setTimeout(()=>p.classList.remove("show"),2500);}
+function copyDiscord(){navigator.clipboard.writeText("https://discord.gg/xmpdSp3D");showPopup("Discord Link Copied!");}
+function copyIP(){navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");showPopup("Minecraft IP Copied!");}
+function goStore(){window.location.href="store.html";}
+
+// SERVER STATUS
 async function checkServer(){
     try{
         const r=await fetch("https://api.mcsrvstat.us/2/BlueBerrySmp.royalnode.cloud:25566");
         const d=await r.json();
         const s=document.getElementById("server-status");
         const p=document.getElementById("player-count");
-        if(d.online){
-            s.innerHTML="Online";
-            s.className="status-online";
-            p.innerHTML=`Players: ${d.players.online} / ${d.players.max}`;
-        } else {
-            s.innerHTML="Offline";
-            s.className="status-offline";
-            p.innerHTML="";
-        }
-    } catch {
-        document.getElementById("server-status").innerHTML="Error";
-    }
+        if(d.online){s.innerHTML="Online";s.className="status-online";p.innerHTML=`Players: ${d.players.online} / ${d.players.max}`;}
+        else{s.innerHTML="Offline";s.className="status-offline";p.innerHTML="";}
+    }catch{s=document.getElementById("server-status");s.innerHTML="Error";}
 }
-checkServer();
-setInterval(checkServer,30000);
+checkServer(); setInterval(checkServer,30000);
+
+// RESIZE CANVAS
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 </script>
 
 </body>
 </html>
-
-
