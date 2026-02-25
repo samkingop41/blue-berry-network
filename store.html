@@ -6,7 +6,6 @@
 
 <title>Blue Berry Store</title>
 
-<!-- WEBSITE LOGO -->
 <link rel="icon" type="image/png" href="logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
@@ -19,31 +18,27 @@ background:linear-gradient(135deg,#0f0f0f,#14001f);
 color:white;
 }
 
-/* LOGO */
 .logo{
 text-align:center;
-margin-top:30px;
+margin-top:25px;
 }
 .logo img{
 width:80px;
 }
 
-/* HEADER */
 header{
 text-align:center;
 color:#00ff88;
 text-shadow:0 0 15px #00ff88;
 }
 
-/* STORE GRID */
 .store-container{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:30px;
 padding:40px;
 }
 
-/* CARD */
 .card{
 background:#111;
 padding:25px;
@@ -54,33 +49,28 @@ transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-10px);
+transform:translateY(-8px);
 box-shadow:0 0 25px #00ff88;
-}
-
-.card img{
-width:120px;
-margin-bottom:15px;
 }
 
 .card h3{
 color:#00ff88;
+margin-bottom:10px;
 }
 
 .price{
-margin:10px 0;
-font-size:1.1rem;
-color:#fff;
+margin:8px 0;
 }
 
 .note{
 font-size:.85rem;
 color:#aaa;
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
-.buy-btn{
-padding:10px 20px;
+.btn{
+padding:9px 18px;
+margin:5px;
 border:2px solid #00ff88;
 background:transparent;
 color:#00ff88;
@@ -89,10 +79,35 @@ border-radius:6px;
 transition:.3s;
 }
 
-.buy-btn:hover{
+.btn:hover{
 background:#00ff88;
 color:black;
-box-shadow:0 0 15px #00ff88;
+box-shadow:0 0 12px #00ff88;
+}
+
+/* POPUP IMAGE VIEWER */
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.popup img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+box-shadow:0 0 30px #00ff88;
+}
+
+.popup:active{
+display:none;
 }
 
 footer{
@@ -107,7 +122,7 @@ color:#777;
 <body>
 
 <div class="logo">
-<img src="logo.png" alt="logo">
+<img src="logo.png">
 </div>
 
 <header>
@@ -116,68 +131,75 @@ color:#777;
 
 <section class="store-container">
 
-<!-- OCEAN -->
 <div class="card">
-<img src="ocean.png">
 <h3>Ocean Rank</h3>
 <div class="price">₹99 INR / 299 PKR</div>
-<button class="buy-btn">Buy Now</button>
+<button class="btn" onclick="showKit('ocean-kit.png')">View Kit</button>
+<button class="btn">Buy</button>
 </div>
 
-<!-- DEADLIEST -->
 <div class="card">
-<img src="deadliest.png">
 <h3>Deadliest Rank</h3>
 <div class="price">₹199 INR / 399 PKR</div>
-<button class="buy-btn">Buy Now</button>
+<button class="btn" onclick="showKit('deadliest-kit.png')">View Kit</button>
+<button class="btn">Buy</button>
 </div>
 
-<!-- OG -->
 <div class="card">
-<img src="og.png">
 <h3>OG Rank</h3>
-<div class="price">₹88 INR / 250 PKR</div>
+<div class="price">₹88 INR</div>
 <div class="note">or 8 Discord Invites</div>
-<button class="buy-btn">Buy Now</button>
+<button class="btn" onclick="showKit('og-kit.png')">View Kit</button>
+<button class="btn">Buy</button>
 </div>
 
-<!-- NEON -->
 <div class="card">
-<img src="neon.png">
 <h3>Neon Rank</h3>
 <div class="price">₹150 INR / 450 PKR</div>
-<button class="buy-btn">Buy Now</button>
+<button class="btn" onclick="showKit('neon-kit.png')">View Kit</button>
+<button class="btn">Buy</button>
 </div>
 
-<!-- MASTER -->
 <div class="card">
-<img src="master.png">
 <h3>Master Rank</h3>
 <div class="price">₹250 INR / 550 PKR</div>
-<button class="buy-btn">Buy Now</button>
+<button class="btn" onclick="showKit('master-kit.png')">View Kit</button>
+<button class="btn">Buy</button>
 </div>
 
-<!-- MEDIA -->
 <div class="card">
-<img src="media.png">
 <h3>Media Rank</h3>
 <div class="note">Fulfill Media Requirements</div>
-<button class="buy-btn">Apply</button>
+<button class="btn">Apply</button>
 </div>
 
-<!-- DC BOOSTER -->
 <div class="card">
-<img src="dcbooster.png">
 <h3>DC Booster</h3>
 <div class="note">Boost the Discord Server</div>
-<button class="buy-btn">Boost Now</button>
+<button class="btn">Boost</button>
 </div>
 
 </section>
 
+<!-- IMAGE POPUP -->
+<div class="popup" id="popup" onclick="hideKit()">
+<img id="kitImage">
+</div>
+
 <footer>
-© 2022 Blue Berry Network
+© 2026 Blue Berry Network
 </footer>
+
+<script>
+function showKit(image){
+document.getElementById("kitImage").src=image;
+document.getElementById("popup").style.display="flex";
+}
+
+function hideKit(){
+document.getElementById("popup").style.display="none";
+}
+</script>
 
 </body>
 </html>
