@@ -5,20 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Berry Store</title>
 
-<!-- Gaming Font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
+/* ===== BODY + ANIMATED GRADIENT ===== */
 body{
     margin:0;
     font-family:'Orbitron',sans-serif;
-    background:radial-gradient(circle at top,#001a14,#000000 70%);
+    background:linear-gradient(-45deg,#001a14,#000000,#002d24,#000000);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
     color:white;
     text-align:center;
+    overflow-x:hidden;
 }
 
-/* HEADER */
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* ===== FLOATING PARTICLES ===== */
+.animated-bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.animated-bg span{
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:rgba(0,255,174,0.15);
+    box-shadow:0 0 15px #00ffae;
+    border-radius:50%;
+    animation:float 15s linear infinite;
+    bottom:-150px;
+}
+
+.animated-bg span:nth-child(1){left:10%; animation-duration:12s;}
+.animated-bg span:nth-child(2){left:25%; animation-duration:18s; width:25px; height:25px;}
+.animated-bg span:nth-child(3){left:40%; animation-duration:14s;}
+.animated-bg span:nth-child(4){left:55%; animation-duration:20s; width:30px; height:30px;}
+.animated-bg span:nth-child(5){left:70%; animation-duration:16s;}
+.animated-bg span:nth-child(6){left:85%; animation-duration:22s;}
+
+@keyframes float{
+    0%{transform:translateY(0) rotate(0deg); opacity:1;}
+    100%{transform:translateY(-1100px) rotate(720deg); opacity:0;}
+}
+
+/* ===== HEADER ===== */
 header{
     padding:40px 20px;
 }
@@ -30,7 +73,7 @@ h1{
     text-shadow:0 0 15px #00ffae,0 0 30px #00ffae;
 }
 
-/* STORE GRID */
+/* ===== GRID ===== */
 .container{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -40,39 +83,14 @@ h1{
     margin:auto;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .card{
-    position:relative;
     background:#0a0f14;
     border-radius:20px;
     padding:30px 25px;
     transition:0.4s;
     border:1px solid rgba(0,255,170,0.3);
     box-shadow:0 0 15px rgba(0,255,170,0.15);
-    overflow:hidden;
-}
-
-/* Animated Neon Border */
-.card::before{
-    content:"";
-    position:absolute;
-    inset:-2px;
-    border-radius:20px;
-    background:linear-gradient(90deg,#00ffae,#00f0ff,#00ffae);
-    background-size:300% 300%;
-    z-index:-1;
-    animation:neonBorder 6s linear infinite;
-    opacity:0;
-    transition:0.4s;
-}
-
-@keyframes neonBorder{
-    0%{background-position:0% 50%;}
-    100%{background-position:300% 50%;}
-}
-
-.card:hover::before{
-    opacity:1;
 }
 
 .card:hover{
@@ -80,32 +98,28 @@ h1{
     box-shadow:0 0 25px #00ffae,0 0 60px rgba(0,255,170,0.4);
 }
 
+/* ===== BLACK RANK BADGE ===== */
 .card h2{
     font-size:20px;
-    margin-bottom:10px;
-    color:#00ffae;
-    text-shadow:0 0 10px #00ffae;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#000;
+    background:linear-gradient(90deg,#00ffae,#00f0ff);
+    padding:12px;
+    border-radius:8px;
+    box-shadow:0 0 15px #00ffae;
 }
 
+/* ===== PRICE ===== */
 .price{
-    margin:15px 0;
+    margin:20px 0;
     font-size:14px;
     color:#aaa;
     line-height:1.6;
 }
 
-/* Divider Line */
-.card::after{
-    content:"";
-    display:block;
-    height:2px;
-    width:50%;
-    margin:15px auto;
-    background:#00ffae;
-    box-shadow:0 0 10px #00ffae;
-}
-
-/* BUTTONS */
+/* ===== BUTTON ===== */
 button{
     margin-top:10px;
     padding:12px;
@@ -127,22 +141,14 @@ button:hover{
     transform:scale(1.05);
 }
 
-/* SPECIAL GLOW COLORS */
-.media{
-    border-color:#ff00ff;
-}
-.media:hover{
-    box-shadow:0 0 25px #ff00ff,0 0 60px rgba(255,0,255,0.4);
-}
+/* ===== SPECIAL GLOWS ===== */
+.media{ border-color:#ff00ff; }
+.media:hover{ box-shadow:0 0 25px #ff00ff,0 0 60px rgba(255,0,255,0.4); }
 
-.booster{
-    border-color:#5865F2;
-}
-.booster:hover{
-    box-shadow:0 0 25px #5865F2,0 0 60px rgba(88,101,242,0.4);
-}
+.booster{ border-color:#5865F2; }
+.booster:hover{ box-shadow:0 0 25px #5865F2,0 0 60px rgba(88,101,242,0.4); }
 
-/* POPUP */
+/* ===== POPUP ===== */
 .popup{
     position:fixed;
     top:0;
@@ -171,7 +177,6 @@ button:hover{
     color:#00ffae;
 }
 
-/* FOOTER */
 footer{
     margin:40px 0;
     font-size:14px;
@@ -182,6 +187,11 @@ footer{
 </head>
 
 <body>
+
+<div class="animated-bg">
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+</div>
 
 <header>
 <h1>BLUE BERRY STORE</h1>
@@ -226,21 +236,20 @@ footer{
 
 <div class="card media">
 <h2>Media Rank</h2>
-<div class="price">Fulfill Media Requirements<br>YouTube / Shorts / Reels</div>
+<div class="price">Fulfill Media Requirements</div>
 <button onclick="showKit('media-kit.png')">View Kit</button>
 <button onclick="buy()">Apply</button>
 </div>
 
 <div class="card booster">
 <h2>DC Booster</h2>
-<div class="price">Boost the Discord Server<br>Exclusive Booster Perks</div>
+<div class="price">Boost the Discord Server</div>
 <button onclick="showKit('dcbooster-kit.png')">View Kit</button>
 <button onclick="buy()">Boost</button>
 </div>
 
 </div>
 
-<!-- POPUP -->
 <div class="popup" id="popup">
 <span class="close" onclick="closePopup()">&times;</span>
 <img id="popup-img">
