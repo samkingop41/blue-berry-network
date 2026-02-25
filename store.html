@@ -3,130 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Blue Berry Store</title>
+
+<!-- WEBSITE LOGO -->
+<link rel="icon" type="image/png" href="logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(135deg, #0f0f0f, #14001f);
-    color: white;
+body{
+margin:0;
+font-family:'Orbitron',sans-serif;
+background:linear-gradient(135deg,#0f0f0f,#14001f);
+color:white;
 }
 
-header {
-    text-align: center;
-    padding: 40px;
-    color: #00ff88;
-    text-shadow: 0 0 15px #00ff88;
+/* LOGO */
+.logo{
+text-align:center;
+margin-top:30px;
+}
+.logo img{
+width:80px;
 }
 
-.store-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    padding: 40px;
+/* HEADER */
+header{
+text-align:center;
+color:#00ff88;
+text-shadow:0 0 15px #00ff88;
 }
 
-.card {
-    background: #111;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid #00ff88;
-    text-align: center;
-    transition: 0.3s;
+/* STORE GRID */
+.store-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:40px;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 20px #00ff88;
+/* CARD */
+.card{
+background:#111;
+padding:25px;
+border-radius:12px;
+border:1px solid #00ff88;
+text-align:center;
+transition:.3s;
 }
 
-.card h3 {
-    color: #00ff88;
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px #00ff88;
 }
 
-.price {
-    margin: 15px 0;
-    font-size: 1.2rem;
+.card img{
+width:120px;
+margin-bottom:15px;
 }
 
-.buy-btn {
-    padding: 10px 20px;
-    border: 2px solid #00ff88;
-    background: transparent;
-    color: #00ff88;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: 0.3s;
+.card h3{
+color:#00ff88;
 }
 
-.buy-btn:hover {
-    background: #00ff88;
-    color: black;
-    box-shadow: 0 0 15px #00ff88;
+.price{
+margin:10px 0;
+font-size:1.1rem;
+color:#fff;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid #222;
-    color: #777;
-    font-size: 0.9rem;
+.note{
+font-size:.85rem;
+color:#aaa;
+margin-bottom:10px;
+}
+
+.buy-btn{
+padding:10px 20px;
+border:2px solid #00ff88;
+background:transparent;
+color:#00ff88;
+cursor:pointer;
+border-radius:6px;
+transition:.3s;
+}
+
+.buy-btn:hover{
+background:#00ff88;
+color:black;
+box-shadow:0 0 15px #00ff88;
+}
+
+footer{
+text-align:center;
+padding:20px;
+border-top:1px solid #222;
+color:#777;
 }
 </style>
 </head>
+
 <body>
 
+<div class="logo">
+<img src="logo.png" alt="logo">
+</div>
+
 <header>
-    <h1>Blue Berry Store</h1>
+<h1>Blue Berry Store</h1>
 </header>
 
 <section class="store-container">
 
-    <!-- Ranks -->
-    <div class="card">
-        <h3>VIP Rank</h3>
-        <div class="price">$5.00</div>
-        <button class="buy-btn">Buy Now</button>
-    </div>
+<!-- OCEAN -->
+<div class="card">
+<img src="ocean.png">
+<h3>Ocean Rank</h3>
+<div class="price">₹99 INR / 299 PKR</div>
+<button class="buy-btn">Buy Now</button>
+</div>
 
-    <div class="card">
-        <h3>MVP Rank</h3>
-        <div class="price">$10.00</div>
-        <button class="buy-btn">Buy Now</button>
-    </div>
+<!-- DEADLIEST -->
+<div class="card">
+<img src="deadliest.png">
+<h3>Deadliest Rank</h3>
+<div class="price">₹199 INR / 399 PKR</div>
+<button class="buy-btn">Buy Now</button>
+</div>
 
-    <div class="card">
-        <h3>LEGEND Rank</h3>
-        <div class="price">$20.00</div>
-        <button class="buy-btn">Buy Now</button>
-    </div>
+<!-- OG -->
+<div class="card">
+<img src="og.png">
+<h3>OG Rank</h3>
+<div class="price">₹88 INR / 250 PKR</div>
+<div class="note">or 8 Discord Invites</div>
+<button class="buy-btn">Buy Now</button>
+</div>
 
-    <!-- Kits -->
-    <div class="card">
-        <h3>Starter Kit</h3>
-        <div class="price">$3.00</div>
-        <button class="buy-btn">Buy Now</button>
-    </div>
+<!-- NEON -->
+<div class="card">
+<img src="neon.png">
+<h3>Neon Rank</h3>
+<div class="price">₹150 INR / 450 PKR</div>
+<button class="buy-btn">Buy Now</button>
+</div>
 
-    <div class="card">
-        <h3>OP Kit</h3>
-        <div class="price">$8.00</div>
-        <button class="buy-btn">Buy Now</button>
-    </div>
+<!-- MASTER -->
+<div class="card">
+<img src="master.png">
+<h3>Master Rank</h3>
+<div class="price">₹250 INR / 550 PKR</div>
+<button class="buy-btn">Buy Now</button>
+</div>
 
-    <div class="card">
-        <h3>PvP Kit</h3>
-        <div class="price">$6.00</div>
-        <button class="buy-btn">Buy Now</button>
-    </div>
+<!-- MEDIA -->
+<div class="card">
+<img src="media.png">
+<h3>Media Rank</h3>
+<div class="note">Fulfill Media Requirements</div>
+<button class="buy-btn">Apply</button>
+</div>
+
+<!-- DC BOOSTER -->
+<div class="card">
+<img src="dcbooster.png">
+<h3>DC Booster</h3>
+<div class="note">Boost the Discord Server</div>
+<button class="buy-btn">Boost Now</button>
+</div>
 
 </section>
 
 <footer>
-    © 2026 Blue Berry Network. All rights reserved.
+© 2022 Blue Berry Network
 </footer>
 
 </body>
