@@ -4,93 +4,152 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Berry Store</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<!-- Gaming Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
+
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Orbitron',sans-serif;
+    background:radial-gradient(circle at top,#001a14,#000000 70%);
     color:white;
     text-align:center;
-    background: linear-gradient(-45deg,#001a14,#002d24,#003d30,#001a14);
-    background-size:400% 400%;
-    animation:bgMove 12s infinite alternate;
 }
 
-@keyframes bgMove{
-    0%{background-position:0% 50%}
-    100%{background-position:100% 50%}
-}
-
+/* HEADER */
 header{
-    padding:20px;
-}
-
-.logo{
-    width:120px;
+    padding:40px 20px;
 }
 
 h1{
+    font-size:38px;
+    letter-spacing:4px;
     color:#00ffae;
-    text-shadow:0 0 15px #00ffae;
+    text-shadow:0 0 15px #00ffae,0 0 30px #00ffae;
 }
 
+/* STORE GRID */
 .container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:25px;
-    padding:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
+    padding:60px;
+    max-width:1300px;
+    margin:auto;
 }
 
+/* CARD */
 .card{
-    background:#000c0a;
-    border:1px solid #00ffae;
-    border-radius:15px;
-    padding:25px;
-    width:260px;
-    box-shadow:0 0 15px rgba(0,255,174,0.4);
-    transition:0.3s;
+    position:relative;
+    background:#0a0f14;
+    border-radius:20px;
+    padding:30px 25px;
+    transition:0.4s;
+    border:1px solid rgba(0,255,170,0.3);
+    box-shadow:0 0 15px rgba(0,255,170,0.15);
+    overflow:hidden;
+}
+
+/* Animated Neon Border */
+.card::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:20px;
+    background:linear-gradient(90deg,#00ffae,#00f0ff,#00ffae);
+    background-size:300% 300%;
+    z-index:-1;
+    animation:neonBorder 6s linear infinite;
+    opacity:0;
+    transition:0.4s;
+}
+
+@keyframes neonBorder{
+    0%{background-position:0% 50%;}
+    100%{background-position:300% 50%;}
+}
+
+.card:hover::before{
+    opacity:1;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 25px rgba(0,255,174,0.9);
+    transform:translateY(-12px) scale(1.05);
+    box-shadow:0 0 25px #00ffae,0 0 60px rgba(0,255,170,0.4);
 }
 
 .card h2{
+    font-size:20px;
+    margin-bottom:10px;
     color:#00ffae;
+    text-shadow:0 0 10px #00ffae;
 }
 
 .price{
-    margin:10px 0;
-    color:#ddd;
+    margin:15px 0;
+    font-size:14px;
+    color:#aaa;
+    line-height:1.6;
 }
 
+/* Divider Line */
+.card::after{
+    content:"";
+    display:block;
+    height:2px;
+    width:50%;
+    margin:15px auto;
+    background:#00ffae;
+    box-shadow:0 0 10px #00ffae;
+}
+
+/* BUTTONS */
 button{
-    margin:8px;
-    padding:10px 18px;
+    margin-top:10px;
+    padding:12px;
+    width:100%;
     border:none;
     border-radius:8px;
-    background:#00ffae;
-    color:black;
+    background:black;
+    color:#00ffae;
     font-weight:bold;
     cursor:pointer;
-    transition:0.2s;
+    border:1px solid #00ffae;
+    transition:0.3s;
 }
 
 button:hover{
-    background:white;
+    background:#00ffae;
+    color:black;
+    box-shadow:0 0 15px #00ffae,0 0 30px #00ffae;
+    transform:scale(1.05);
 }
 
-/* popup */
+/* SPECIAL GLOW COLORS */
+.media{
+    border-color:#ff00ff;
+}
+.media:hover{
+    box-shadow:0 0 25px #ff00ff,0 0 60px rgba(255,0,255,0.4);
+}
+
+.booster{
+    border-color:#5865F2;
+}
+.booster:hover{
+    box-shadow:0 0 25px #5865F2,0 0 60px rgba(88,101,242,0.4);
+}
+
+/* POPUP */
 .popup{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.85);
+    background:rgba(0,0,0,0.9);
     display:none;
     justify-content:center;
     align-items:center;
@@ -105,31 +164,31 @@ button:hover{
 
 .close{
     position:absolute;
-    top:25px;
-    right:35px;
-    font-size:35px;
+    top:30px;
+    right:40px;
+    font-size:40px;
     cursor:pointer;
-    color:white;
+    color:#00ffae;
 }
 
+/* FOOTER */
 footer{
-    margin:30px 0;
-    color:#aaa;
+    margin:40px 0;
     font-size:14px;
+    color:#777;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-<img src="logo.png" class="logo">
-<h1>Blue Berry Store</h1>
+<h1>BLUE BERRY STORE</h1>
 </header>
 
 <div class="container">
 
-<!-- Ocean -->
 <div class="card">
 <h2>Ocean Rank</h2>
 <div class="price">₹99 / 299 PKR</div>
@@ -137,7 +196,6 @@ footer{
 <button onclick="buy()">Buy</button>
 </div>
 
-<!-- Deadliest -->
 <div class="card">
 <h2>Deadliest Rank</h2>
 <div class="price">₹199 / 399 PKR</div>
@@ -145,7 +203,6 @@ footer{
 <button onclick="buy()">Buy</button>
 </div>
 
-<!-- OG -->
 <div class="card">
 <h2>OG Rank</h2>
 <div class="price">₹88 / 250 PKR<br>or 8 Discord Invites</div>
@@ -153,7 +210,6 @@ footer{
 <button onclick="buy()">Buy</button>
 </div>
 
-<!-- Neon -->
 <div class="card">
 <h2>Neon Rank</h2>
 <div class="price">₹150 / 450 PKR</div>
@@ -161,7 +217,6 @@ footer{
 <button onclick="buy()">Buy</button>
 </div>
 
-<!-- Master -->
 <div class="card">
 <h2>Master Rank</h2>
 <div class="price">₹250 / 550 PKR</div>
@@ -169,25 +224,23 @@ footer{
 <button onclick="buy()">Buy</button>
 </div>
 
-<!-- Media -->
-<div class="card">
+<div class="card media">
 <h2>Media Rank</h2>
-<div class="price">Fulfill Media Requirements</div>
+<div class="price">Fulfill Media Requirements<br>YouTube / Shorts / Reels</div>
 <button onclick="showKit('media-kit.png')">View Kit</button>
 <button onclick="buy()">Apply</button>
 </div>
 
-<!-- Booster -->
-<div class="card">
+<div class="card booster">
 <h2>DC Booster</h2>
-<div class="price">Boost the Discord Server</div>
+<div class="price">Boost the Discord Server<br>Exclusive Booster Perks</div>
 <button onclick="showKit('dcbooster-kit.png')">View Kit</button>
 <button onclick="buy()">Boost</button>
 </div>
 
 </div>
 
-<!-- popup -->
+<!-- POPUP -->
 <div class="popup" id="popup">
 <span class="close" onclick="closePopup()">&times;</span>
 <img id="popup-img">
@@ -215,4 +268,3 @@ function buy(){
 
 </body>
 </html>
-
