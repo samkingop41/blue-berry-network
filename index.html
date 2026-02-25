@@ -155,7 +155,7 @@ footer {
 <div id="popup" class="popup"></div>
 
 <footer>
-    © 2026 Blue Berry Network. All rights reserved.
+    © 2022 Blue Berry Network. All rights reserved.
 </footer>
 
 <script>
@@ -209,7 +209,7 @@ function copyDiscord(){
     showPopup("Discord Link Copied!");
 }
 function copyIP(){
-    navigator.clipboard.writeText("uae-2.royalnode.cloud:25566");
+    navigator.clipboard.writeText("BlueBerrySmp.royalnode.cloud:25566");
     showPopup("Minecraft IP Copied!");
 }
 function goStore(){ window.location.href="store.html"; }
@@ -217,7 +217,7 @@ function goStore(){ window.location.href="store.html"; }
 // server status
 async function checkServer(){
     try{
-        const r=await fetch("https://api.mcsrvstat.us/2/uae-2.royalnode.cloud:25566");
+        const r=await fetch("https://api.mcsrvstat.us/2/BlueBerrySmp.royalnode.cloud:25566");
         const d=await r.json();
         const s=document.getElementById("server-status");
         const p=document.getElementById("player-count");
@@ -240,3 +240,4 @@ setInterval(checkServer,30000);
 
 </body>
 </html>
+
