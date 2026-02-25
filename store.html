@@ -3,308 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Blue Berry Store</title>
-
-<link rel="icon" type="image/png" href="logo.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 body{
-margin:0;
-font-family:'Orbitron',sans-serif;
-color:white;
-overflow-x:hidden;
-background:#020617;
-}
-
-/* 🌌 ANIMATED BACKGROUND */
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(270deg,#020617,#14001f,#001a14,#020617);
-background-size:600% 600%;
-animation:bgMove 18s ease infinite;
-z-index:-2;
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    color:white;
+    text-align:center;
+    background: linear-gradient(-45deg,#001a14,#002d24,#003d30,#001a14);
+    background-size:400% 400%;
+    animation:bgMove 12s infinite alternate;
 }
 
 @keyframes bgMove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+    0%{background-position:0% 50%}
+    100%{background-position:100% 50%}
 }
 
-/* glowing floating dots */
-body::after{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:url("https://www.transparenttextures.com/patterns/stardust.png");
-opacity:0.15;
-z-index:-1;
-}
-
-/* LOGO */
-.logo{
-text-align:center;
-margin-top:25px;
-}
-.logo img{
-width:95px;
-filter:drop-shadow(0 0 15px #00ff88);
-}
-
-/* HEADER */
 header{
-text-align:center;
-color:#00ff88;
-text-shadow:0 0 18px #00ff88;
-margin-bottom:20px;
+    padding:20px;
 }
 
-/* STORE GRID */
-.store-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-padding:40px;
+.logo{
+    width:120px;
 }
 
-/* CARD */
+h1{
+    color:#00ffae;
+    text-shadow:0 0 15px #00ffae;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    padding:30px;
+}
+
 .card{
-background:#0b0b13;
-padding:25px;
-border-radius:14px;
-border:1px solid rgba(0,255,136,0.5);
-text-align:center;
-transition:.35s;
-position:relative;
-overflow:hidden;
+    background:#000c0a;
+    border:1px solid #00ffae;
+    border-radius:15px;
+    padding:25px;
+    width:260px;
+    box-shadow:0 0 15px rgba(0,255,174,0.4);
+    transition:0.3s;
 }
-
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(120deg,transparent,rgba(0,255,136,.25),transparent);
-opacity:0;
-transition:.4s;
-}
-
-.card:hover::before{ opacity:1; }
 
 .card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 30px rgba(0,255,136,.6);
+    transform:translateY(-8px);
+    box-shadow:0 0 25px rgba(0,255,174,0.9);
 }
 
-.card h3{
-color:#00ff88;
-margin-bottom:10px;
+.card h2{
+    color:#00ffae;
 }
 
 .price{
-margin:8px 0;
-font-size:1.1rem;
+    margin:10px 0;
+    color:#ddd;
 }
 
-.note{
-font-size:.85rem;
-color:#aaa;
-margin-bottom:12px;
+button{
+    margin:8px;
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    background:#00ffae;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
 }
 
-.btn{
-padding:9px 18px;
-margin:5px;
-border:2px solid #00ff88;
-background:transparent;
-color:#00ff88;
-cursor:pointer;
-border-radius:6px;
-transition:.3s;
+button:hover{
+    background:white;
 }
 
-.btn:hover{
-background:#00ff88;
-color:black;
-box-shadow:0 0 15px #00ff88;
-}
-
-/* KIT POPUP */
+/* popup */
 .popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.88);
-justify-content:center;
-align-items:center;
-z-index:999;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
 }
 
 .popup img{
-max-width:90%;
-max-height:90%;
-border-radius:10px;
-box-shadow:0 0 35px #00ff88;
+    max-width:90%;
+    max-height:90%;
+    border-radius:10px;
 }
 
-/* BUY POPUP */
-.buy-popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.88);
-justify-content:center;
-align-items:center;
-z-index:1000;
-}
-
-.buy-box{
-background:#0b0b13;
-padding:30px;
-border-radius:12px;
-text-align:center;
-border:1px solid #00ff88;
-box-shadow:0 0 25px rgba(0,255,136,.5);
-}
-
-.buy-box h2{
-color:#00ff88;
-margin-bottom:15px;
+.close{
+    position:absolute;
+    top:25px;
+    right:35px;
+    font-size:35px;
+    cursor:pointer;
+    color:white;
 }
 
 footer{
-text-align:center;
-padding:25px;
-border-top:1px solid #222;
-color:#aaa;
-font-size:.85rem;
-margin-top:30px;
+    margin:30px 0;
+    color:#aaa;
+    font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="logo">
-<img src="logo.png">
-</div>
-
 <header>
+<img src="logo.png" class="logo">
 <h1>Blue Berry Store</h1>
 </header>
 
-<section class="store-container">
+<div class="container">
 
+<!-- Ocean -->
 <div class="card">
-<h3>Ocean Rank</h3>
+<h2>Ocean Rank</h2>
 <div class="price">₹99 / 299 PKR</div>
-<button class="btn" onclick="showKit('ocean-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('Ocean Rank')">Buy</button>
+<button onclick="showKit('ocean-kit.png')">View Kit</button>
+<button onclick="buy()">Buy</button>
 </div>
 
+<!-- Deadliest -->
 <div class="card">
-<h3>Deadliest Rank</h3>
+<h2>Deadliest Rank</h2>
 <div class="price">₹199 / 399 PKR</div>
-<button class="btn" onclick="showKit('deadliest-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('Deadliest Rank')">Buy</button>
+<button onclick="showKit('deadliest-kit.png')">View Kit</button>
+<button onclick="buy()">Buy</button>
 </div>
 
+<!-- OG -->
 <div class="card">
-<h3>OG Rank</h3>
-<div class="price">₹88 / 250 PKR</div>
-<div class="note">or 8 Discord Invites</div>
-<button class="btn" onclick="showKit('og-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('OG Rank')">Buy</button>
+<h2>OG Rank</h2>
+<div class="price">₹88 / 250 PKR<br>or 8 Discord Invites</div>
+<button onclick="showKit('og-kit.png')">View Kit</button>
+<button onclick="buy()">Buy</button>
 </div>
 
+<!-- Neon -->
 <div class="card">
-<h3>Neon Rank</h3>
+<h2>Neon Rank</h2>
 <div class="price">₹150 / 450 PKR</div>
-<button class="btn" onclick="showKit('neon-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('Neon Rank')">Buy</button>
+<button onclick="showKit('neon-kit.png')">View Kit</button>
+<button onclick="buy()">Buy</button>
 </div>
 
+<!-- Master -->
 <div class="card">
-<h3>Master Rank</h3>
+<h2>Master Rank</h2>
 <div class="price">₹250 / 550 PKR</div>
-<button class="btn" onclick="showKit('master-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('Master Rank')">Buy</button>
+<button onclick="showKit('master-kit.png')">View Kit</button>
+<button onclick="buy()">Buy</button>
 </div>
 
+<!-- Media -->
 <div class="card">
-<h3>Media Rank</h3>
-<div class="note">Fulfill Media Requirements</div>
-<button class="btn" onclick="showKit('media-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('Media Rank')">Apply</button>
+<h2>Media Rank</h2>
+<div class="price">Fulfill Media Requirements</div>
+<button onclick="showKit('media-kit.png')">View Kit</button>
+<button onclick="buy()">Apply</button>
 </div>
 
+<!-- Booster -->
 <div class="card">
-<h3>DC Booster</h3>
-<div class="note">Boost the Discord Server</div>
-<button class="btn" onclick="showKit('dcbooster-kit.png')">View Kit</button>
-<button class="btn" onclick="openBuy('DC Booster')">Boost</button>
+<h2>DC Booster</h2>
+<div class="price">Boost the Discord Server</div>
+<button onclick="showKit('dcbooster-kit.png')">View Kit</button>
+<button onclick="buy()">Boost</button>
 </div>
 
-</section>
-
-<!-- KIT POPUP -->
-<div class="popup" id="kitPopup" onclick="closeKit()">
-<img id="kitImage">
 </div>
 
-<!-- BUY POPUP -->
-<div class="buy-popup" id="buyPopup">
-<div class="buy-box">
-<h2 id="rankTitle"></h2>
-<p>Open a ticket in our Discord server to purchase.</p>
-<br>
-<button class="btn" onclick="goDiscord()">Open Discord</button>
-<button class="btn" onclick="closeBuy()">Cancel</button>
-</div>
+<!-- popup -->
+<div class="popup" id="popup">
+<span class="close" onclick="closePopup()">&times;</span>
+<img id="popup-img">
 </div>
 
 <footer>
-© 2022 Blue Berry Network <br>
 Made by santurio41
 </footer>
 
 <script>
-const discordLink = "https://discord.gg/cwVU3WWrmq";
-
-function showKit(image){
-document.getElementById("kitImage").src=image;
-document.getElementById("kitPopup").style.display="flex";
+function showKit(img){
+    document.getElementById("popup").style.display="flex";
+    document.getElementById("popup-img").src=img;
 }
 
-function closeKit(){
-document.getElementById("kitPopup").style.display="none";
+function closePopup(){
+    document.getElementById("popup").style.display="none";
 }
 
-function openBuy(rank){
-document.getElementById("rankTitle").innerText = rank;
-document.getElementById("buyPopup").style.display="flex";
-}
-
-function closeBuy(){
-document.getElementById("buyPopup").style.display="none";
-}
-
-function goDiscord(){
-window.open(discordLink,"_blank");
+function buy(){
+    alert("Open ticket in Discord server to purchase.");
+    window.open("https://discord.gg/cwVU3WWrmq","_blank");
 }
 </script>
 
