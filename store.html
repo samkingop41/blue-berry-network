@@ -14,24 +14,61 @@
 body{
 margin:0;
 font-family:'Orbitron',sans-serif;
-background:linear-gradient(135deg,#0f0f0f,#14001f);
 color:white;
+overflow-x:hidden;
+background:#020617;
 }
 
+/* 🌌 ANIMATED BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(270deg,#020617,#14001f,#001a14,#020617);
+background-size:600% 600%;
+animation:bgMove 18s ease infinite;
+z-index:-2;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* glowing floating dots */
+body::after{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:0.15;
+z-index:-1;
+}
+
+/* LOGO */
 .logo{
 text-align:center;
 margin-top:25px;
 }
 .logo img{
-width:80px;
+width:95px;
+filter:drop-shadow(0 0 15px #00ff88);
 }
 
+/* HEADER */
 header{
 text-align:center;
 color:#00ff88;
-text-shadow:0 0 15px #00ff88;
+text-shadow:0 0 18px #00ff88;
+margin-bottom:20px;
 }
 
+/* STORE GRID */
 .store-container{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -39,18 +76,32 @@ gap:30px;
 padding:40px;
 }
 
+/* CARD */
 .card{
-background:#111;
+background:#0b0b13;
 padding:25px;
-border-radius:12px;
-border:1px solid #00ff88;
+border-radius:14px;
+border:1px solid rgba(0,255,136,0.5);
 text-align:center;
-transition:.3s;
+transition:.35s;
+position:relative;
+overflow:hidden;
 }
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent,rgba(0,255,136,.25),transparent);
+opacity:0;
+transition:.4s;
+}
+
+.card:hover::before{ opacity:1; }
 
 .card:hover{
 transform:translateY(-8px);
-box-shadow:0 0 25px #00ff88;
+box-shadow:0 0 30px rgba(0,255,136,.6);
 }
 
 .card h3{
@@ -60,6 +111,7 @@ margin-bottom:10px;
 
 .price{
 margin:8px 0;
+font-size:1.1rem;
 }
 
 .note{
@@ -82,10 +134,10 @@ transition:.3s;
 .btn:hover{
 background:#00ff88;
 color:black;
-box-shadow:0 0 12px #00ff88;
+box-shadow:0 0 15px #00ff88;
 }
 
-/* POPUP IMAGE VIEWER */
+/* KIT POPUP */
 .popup{
 display:none;
 position:fixed;
@@ -93,7 +145,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.88);
 justify-content:center;
 align-items:center;
 z-index:999;
@@ -103,18 +155,44 @@ z-index:999;
 max-width:90%;
 max-height:90%;
 border-radius:10px;
-box-shadow:0 0 30px #00ff88;
+box-shadow:0 0 35px #00ff88;
 }
 
-.popup:active{
+/* BUY POPUP */
+.buy-popup{
 display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.88);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.buy-box{
+background:#0b0b13;
+padding:30px;
+border-radius:12px;
+text-align:center;
+border:1px solid #00ff88;
+box-shadow:0 0 25px rgba(0,255,136,.5);
+}
+
+.buy-box h2{
+color:#00ff88;
+margin-bottom:15px;
 }
 
 footer{
 text-align:center;
-padding:20px;
+padding:25px;
 border-top:1px solid #222;
-color:#777;
+color:#aaa;
+font-size:.85rem;
+margin-top:30px;
 }
 </style>
 </head>
@@ -133,79 +211,102 @@ color:#777;
 
 <div class="card">
 <h3>Ocean Rank</h3>
-<div class="price">₹99 INR / 299 PKR</div>
+<div class="price">₹99 / 299 PKR</div>
 <button class="btn" onclick="showKit('ocean-kit.png')">View Kit</button>
-<button class="btn">Buy</button>
+<button class="btn" onclick="openBuy('Ocean Rank')">Buy</button>
 </div>
 
 <div class="card">
 <h3>Deadliest Rank</h3>
-<div class="price">₹199 INR / 399 PKR</div>
+<div class="price">₹199 / 399 PKR</div>
 <button class="btn" onclick="showKit('deadliest-kit.png')">View Kit</button>
-<button class="btn">Buy</button>
+<button class="btn" onclick="openBuy('Deadliest Rank')">Buy</button>
 </div>
 
 <div class="card">
 <h3>OG Rank</h3>
-<div class="price">₹88 INR / 250 PKR</div>
+<div class="price">₹88 / 250 PKR</div>
 <div class="note">or 8 Discord Invites</div>
 <button class="btn" onclick="showKit('og-kit.png')">View Kit</button>
-<button class="btn">Buy</button>
+<button class="btn" onclick="openBuy('OG Rank')">Buy</button>
 </div>
 
 <div class="card">
 <h3>Neon Rank</h3>
-<div class="price">₹150 INR / 450 PKR</div>
+<div class="price">₹150 / 450 PKR</div>
 <button class="btn" onclick="showKit('neon-kit.png')">View Kit</button>
-<button class="btn">Buy</button>
+<button class="btn" onclick="openBuy('Neon Rank')">Buy</button>
 </div>
 
 <div class="card">
 <h3>Master Rank</h3>
-<div class="price">₹250 INR / 550 PKR</div>
+<div class="price">₹250 / 550 PKR</div>
 <button class="btn" onclick="showKit('master-kit.png')">View Kit</button>
-<button class="btn">Buy</button>
+<button class="btn" onclick="openBuy('Master Rank')">Buy</button>
 </div>
 
 <div class="card">
 <h3>Media Rank</h3>
 <div class="note">Fulfill Media Requirements</div>
-<button class="btn" onclick="showKit('meadia-kit.png')">View Kit</button>
-<button class="btn">Apply</button>
+<button class="btn" onclick="showKit('media-kit.png')">View Kit</button>
+<button class="btn" onclick="openBuy('Media Rank')">Apply</button>
 </div>
 
 <div class="card">
 <h3>DC Booster</h3>
 <div class="note">Boost the Discord Server</div>
 <button class="btn" onclick="showKit('dcbooster-kit.png')">View Kit</button>
-<button class="btn">Boost</button>
+<button class="btn" onclick="openBuy('DC Booster')">Boost</button>
 </div>
 
 </section>
 
-<!-- IMAGE POPUP -->
-<div class="popup" id="popup" onclick="hideKit()">
+<!-- KIT POPUP -->
+<div class="popup" id="kitPopup" onclick="closeKit()">
 <img id="kitImage">
 </div>
 
+<!-- BUY POPUP -->
+<div class="buy-popup" id="buyPopup">
+<div class="buy-box">
+<h2 id="rankTitle"></h2>
+<p>Open a ticket in our Discord server to purchase.</p>
+<br>
+<button class="btn" onclick="goDiscord()">Open Discord</button>
+<button class="btn" onclick="closeBuy()">Cancel</button>
+</div>
+</div>
+
 <footer>
-© 2022 Blue Berry Network/
+© 2022 Blue Berry Network <br>
 Made by santurio41
 </footer>
 
 <script>
+const discordLink = "https://discord.gg/cwVU3WWrmq";
+
 function showKit(image){
 document.getElementById("kitImage").src=image;
-document.getElementById("popup").style.display="flex";
+document.getElementById("kitPopup").style.display="flex";
 }
 
-function hideKit(){
-document.getElementById("popup").style.display="none";
+function closeKit(){
+document.getElementById("kitPopup").style.display="none";
+}
+
+function openBuy(rank){
+document.getElementById("rankTitle").innerText = rank;
+document.getElementById("buyPopup").style.display="flex";
+}
+
+function closeBuy(){
+document.getElementById("buyPopup").style.display="none";
+}
+
+function goDiscord(){
+window.open(discordLink,"_blank");
 }
 </script>
 
 </body>
 </html>
-
-
-
